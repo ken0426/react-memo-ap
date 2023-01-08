@@ -20,6 +20,13 @@
       { "extensions": [".js", ".jsx", "ts", "tsx"] }
     ],
     "react/jsx-uses-react": "off",
-    "react/react-in-jsx-scope": "off"
+    "react/react-in-jsx-scope": "off",
+    "import/extensions": [".js", ".jsx", ".json", ".ts", ".tsx"]
+  },
+  "settings": {
+    "import/resolver": {
+      "typescript": { "project": "./" }
+      // たぶんeslintrc.jsからtsconfig.jsonがあるディレクトリへの相対パス
+    }
   }
 }
