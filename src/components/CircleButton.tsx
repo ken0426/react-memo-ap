@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { Feather } from '@expo/vector-icons';
 
 type Props = {
   icon: string;
@@ -9,7 +10,7 @@ type Props = {
 const CircleButton = ({ icon, style }: Props) => {
   return (
     <View style={[styles.circleButton, style]}>
-      <Text style={styles.circleButtonLabel}>{icon}</Text>
+      <Feather name='plus' size={32} color='#ffffff' />
     </View>
   );
 };
