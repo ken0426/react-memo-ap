@@ -3,11 +3,12 @@ import { StyleSheet, Text, View } from 'react-native';
 
 type Props = {
   icon: string;
+  style?: object;
 };
 
-const CircleButton = ({ icon }: Props) => {
+const CircleButton = ({ icon, style }: Props) => {
   return (
-    <View style={styles.circleButton}>
+    <View style={[styles.circleButton, style]}>
       <Text style={styles.circleButtonLabel}>{icon}</Text>
     </View>
   );
