@@ -6,13 +6,11 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import AppBar from '../components/AppBar';
 import Button from '../components/Button';
 
 const SingUpScreen = () => {
   return (
     <View style={styles.container}>
-      <AppBar />
       <View style={styles.inner}>
         <Text style={styles.title}>Sing Up</Text>
         <TextInput style={styles.input} value='Email Address' />

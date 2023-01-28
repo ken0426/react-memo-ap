@@ -1,13 +1,11 @@
 import React from 'react';
 import { StyleSheet, TextInput, View, Alert } from 'react-native';
-import AppBar from '../components/AppBar';
 import CircleButton from '../components/CircleButton';
 import KeyboardSafeView from '../components/KeyboardSafeView';
 
 const MemoEditScreen = () => {
   return (
     <KeyboardSafeView style={styles.container} behavior='height'>
-      <AppBar />
       <View style={styles.inputContainer}>
         <TextInput value='買い物リスト' multiline={true} style={styles.input} />
       </View>
