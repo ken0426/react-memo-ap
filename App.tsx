@@ -1,3 +1,4 @@
+import LoginScreen from './src/components/LoginScreen';
 import MemoCreateScreen from './src/components/MemoCreateScreen';
 import MemoEditScreen from './src/components/MemoEditScreen';
 import MemoDetailScreen from './src/screens/MemoDetailScreen';
@@ -7,7 +8,8 @@ export default function App() {
   return (
     // <MemoListScreen />
     // <MemoDetailScreen />
-    <MemoEditScreen />
+    // <MemoEditScreen />
     // <MemoCreateScreen />
+    <LoginScreen />
   );
 }
