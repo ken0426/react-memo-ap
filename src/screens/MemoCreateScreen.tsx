@@ -1,15 +1,15 @@
 import React from 'react';
-import { StyleSheet, TextInput, View } from 'react-native';
-import AppBar from './AppBar';
-import CircleButton from './CircleButton';
-import KeyboardSafeView from './KeyboardSafeView';
+import { Keyboard, StyleSheet, TextInput, View } from 'react-native';
+import AppBar from '../components/AppBar';
+import CircleButton from '../components/CircleButton';
+import KeyboardSafeView from '../components/KeyboardSafeView';
 
-const MemoEditScreen = () => {
+const MemoCreateScreen = () => {
   return (
     <KeyboardSafeView style={styles.container} behavior='height'>
       <AppBar />
       <View style={styles.inputContainer}>
-        <TextInput value='買い物リスト' multiline={true} style={styles.input} />
+        <TextInput value='' multiline={true} style={styles.input} />
       </View>
       <CircleButton name='check' />
     </KeyboardSafeView>
@@ -33,4 +33,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MemoEditScreen;
+export default MemoCreateScreen;

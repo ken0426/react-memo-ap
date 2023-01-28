@@ -1,20 +1,28 @@
 import React from 'react';
-import { StyleSheet, Text, TextInput, View } from 'react-native';
-import AppBar from './AppBar';
-import Button from './Button';
+import {
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import AppBar from '../components/AppBar';
+import Button from '../components/Button';
 
-const LoginScreen = () => {
+const SingUpScreen = () => {
   return (
     <View style={styles.container}>
       <AppBar />
       <View style={styles.inner}>
-        <Text style={styles.title}>Login</Text>
+        <Text style={styles.title}>Sing Up</Text>
         <TextInput style={styles.input} value='Email Address' />
         <TextInput style={styles.input} value='Password' />
         <Button label={'Submit'} />
         <View style={styles.footer}>
-          <Text style={styles.footerText}>Not registered?</Text>
-          <Text style={styles.footerLink}>Sign up Here!</Text>
+          <Text style={styles.footerText}>Already registered?</Text>
+          <TouchableOpacity>
+            <Text style={styles.footerLink}>Login</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </View>
@@ -61,4 +69,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LoginScreen;
+export default SingUpScreen;
