@@ -1,22 +1,18 @@
 import React from 'react';
-import {
-  StyleSheet,
-  TextInput,
-  View,
-  KeyboardAvoidingView,
-} from 'react-native';
+import { Keyboard, StyleSheet, TextInput, View } from 'react-native';
 import AppBar from './AppBar';
 import CircleButton from './CircleButton';
+import KeyboardSafeView from './KeyboardSafeView';
 
 const MemoCreateScreen = () => {
   return (
-    <KeyboardAvoidingView style={styles.container} behavior='height'>
+    <KeyboardSafeView style={styles.container} behavior='height'>
       <AppBar />
       <View style={styles.inputContainer}>
         <TextInput value='' multiline={true} style={styles.input} />
       </View>
       <CircleButton name='check' />
-    </KeyboardAvoidingView>
+    </KeyboardSafeView>
   );
 };
 

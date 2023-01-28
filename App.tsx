@@ -7,7 +7,7 @@ export default function App() {
   return (
     // <MemoListScreen />
     // <MemoDetailScreen />
-    // <MemoEditScreen />
-    <MemoCreateScreen />
+    <MemoEditScreen />
+    // <MemoCreateScreen />
   );
 }
