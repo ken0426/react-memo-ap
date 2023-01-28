@@ -2,7 +2,7 @@ import React from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import CircleButton from '../components/CircleButton';
 
-const MemoDetailScreen = () => {
+const MemoDetailScreen = ({ navigation }: any) => {
   return (
     <View style={styles.container}>
       <View style={styles.memoHeader}>
@@ -15,7 +15,13 @@ const MemoDetailScreen = () => {
           本文用なので使い方を間違えると不自然に見えることもありますので要注意。
         </Text>
       </ScrollView>
-      <CircleButton name={'edit-2'} style={{ top: 60, bottom: 'auto' }} />
+      <CircleButton
+        name={'edit-2'}
+        style={{ top: 60, bottom: 'auto' }}
+        onPress={() => {
+          navigation.navigate('MemoEdit');
+        }}
+      />
     </View>
   );
 };

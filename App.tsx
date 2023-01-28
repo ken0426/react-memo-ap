@@ -14,13 +14,15 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName='MemoDetail'
+        initialRouteName='Login'
         screenOptions={{
           headerStyle: {
             backgroundColor: '#467fd3',
           },
           headerTitleStyle: { color: '#ffffff' },
           headerTitle: 'Memo App',
+          headerTintColor: '#ffffff',
+          headerBackTitle: 'Back',
         }}
       >
         <Stack.Screen name='MemoList' component={MemoListScreen} />
