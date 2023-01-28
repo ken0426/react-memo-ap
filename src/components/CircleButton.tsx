@@ -4,7 +4,7 @@ import { Feather } from '@expo/vector-icons';
 
 type Props = {
   style?: object;
-  name: string;
+  name: any;
   onPress?: () => void;
 };
 
