@@ -6,7 +6,7 @@ import MemoList from '../components/MemoList';
 const MemoListScreen = ({ navigation }: any) => {
   return (
     <View style={styles.container}>
-      <MemoList />
+      <MemoList navigation={navigation} />
       <CircleButton
         name={'plus'}
         onPress={() => {
