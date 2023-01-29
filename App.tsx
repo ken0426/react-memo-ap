@@ -23,14 +23,28 @@ export default function App() {
           headerTitle: 'Memo App',
           headerTintColor: '#ffffff',
           headerBackTitle: 'Back',
+          gestureEnabled: true,
+          gestureDirection: 'horizontal',
         }}
       >
         <Stack.Screen name='MemoList' component={MemoListScreen} />
         <Stack.Screen name='MemoDetail' component={MemoDetailScreen} />
         <Stack.Screen name='MemoEdit' component={MemoEditScreen} />
         <Stack.Screen name='MemoCreate' component={MemoCreateScreen} />
-        <Stack.Screen name='Login' component={LoginScreen} />
-        <Stack.Screen name='SingUP' component={SingUpScreen} />
+        <Stack.Screen
+          name='Login'
+          component={LoginScreen}
+          options={{
+            presentation: 'fullScreenModal',
+          }}
+        />
+        <Stack.Screen
+          name='SingUP'
+          component={SingUpScreen}
+          options={{
+            presentation: 'fullScreenModal',
+          }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
