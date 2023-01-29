@@ -1,16 +1,35 @@
 import React, { useState } from 'react';
+import firebase from 'firebase';
 import {
   StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
   View,
+  Alert,
 } from 'react-native';
 import Button from '../components/Button';
 
 const LoginScreen = ({ navigation }: any) => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+
+  const handlePress = () => {
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .then((userCredential) => {
+        const { user } = userCredential;
+        console.log(user?.uid);
+        navigation.reset({
+          index: 0,
+          routes: [{ name: 'MemoList' }],
+        });
+      })
+      .catch((error) => {
+        Alert.alert('ログインに失敗しました');
+      });
+  };
 
   return (
     <View style={styles.container}>
@@ -38,15 +57,7 @@ const LoginScreen = ({ navigation }: any) => {
           secureTextEntry
           textContentType='password' // iOSの場合「キーチェーン」にパスワードが登録されている場合自動的に持ってくることが可能
         />
-        <Button
-          label={'Submit'}
-          onPress={() => {
-            navigation.reset({
-              index: 0,
-              routes: [{ name: 'MemoList' }],
-            });
-          }}
-        />
+        <Button label={'Submit'} onPress={handlePress} />
         <View style={styles.footer}>
           <Text style={styles.footerText}>Not registered?</Text>
           <TouchableOpacity

@@ -5,12 +5,37 @@ import {
   TextInput,
   TouchableOpacity,
   View,
+  Alert,
 } from 'react-native';
 import Button from '../components/Button';
+
+import firebase from 'firebase';
 
 const SingUpScreen = ({ navigation }: any) => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+
+  const handlePress = () => {
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then((userCredential) => {
+        const { user } = userCredential;
+        console.log(user?.uid);
+        navigation.reset({
+          index: 0,
+          routes: [
+            {
+              name: 'MemoList',
+            },
+          ],
+        });
+      })
+      .catch((error) => {
+        Alert.alert('新規登録に失敗しました');
+        console.log(error.code, error.message);
+      });
+  };
 
   return (
     <View style={styles.container}>
@@ -38,19 +63,7 @@ const SingUpScreen = ({ navigation }: any) => {
           secureTextEntry
           textContentType='password' // iOSの場合「キーチェーン」にパスワードが登録されている場合自動的に持ってくることが可能
         />
-        <Button
-          label={'Submit'}
-          onPress={() => {
-            navigation.reset({
-              index: 0,
-              routes: [
-                {
-                  name: 'MemoList',
-                },
-              ],
-            });
-          }}
-        />
+        <Button label={'Submit'} onPress={handlePress} />
         <View style={styles.footer}>
           <Text style={styles.footerText}>Already registered?</Text>
           <TouchableOpacity
