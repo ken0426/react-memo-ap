@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   StyleSheet,
   Text,
@@ -9,12 +9,35 @@ import {
 import Button from '../components/Button';
 
 const SingUpScreen = ({ navigation }: any) => {
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+
   return (
     <View style={styles.container}>
       <View style={styles.inner}>
         <Text style={styles.title}>Sing Up</Text>
-        <TextInput style={styles.input} value='Email Address' />
-        <TextInput style={styles.input} value='Password' />
+        <TextInput
+          style={styles.input}
+          value={email}
+          onChangeText={(text) => {
+            setEmail(text);
+          }}
+          autoCapitalize='none' // 英語入力の時、最初の文字が大文字にならない設定
+          keyboardType='email-address' // キーボードがメールアドレスのキーボードに変化
+          placeholder='メールアドレス'
+          textContentType='emailAddress' // iOSの場合「キーチェーン」にメールアドレスが登録されている場合自動的に持ってくることが可能
+        />
+        <TextInput
+          style={styles.input}
+          value={password}
+          onChangeText={(text) => {
+            setPassword(text);
+          }}
+          autoCapitalize='none' // 英語入力の時、最初の文字が大文字にならない設定
+          placeholder='パスワード'
+          secureTextEntry
+          textContentType='password' // iOSの場合「キーチェーン」にパスワードが登録されている場合自動的に持ってくることが可能
+        />
         <Button
           label={'Submit'}
           onPress={() => {
