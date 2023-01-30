@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import firebase from 'firebase';
 import {
   StyleSheet,
@@ -13,6 +13,19 @@ import Button from '../components/Button';
 const LoginScreen = ({ navigation }: any) => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+
+  // ログインをしているかどうか監視するロジック
+  useEffect(() => {
+    const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        navigation.reset({
+          index: 0,
+          routes: [{ name: 'MemoList' }],
+        });
+      }
+    });
+    return unsubscribe;
+  }, []);
 
   const handlePress = () => {
     firebase
