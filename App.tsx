@@ -10,6 +10,8 @@ import MemoDetailScreen from './src/screens/MemoDetailScreen';
 import MemoListScreen from './src/screens/MemoListScreen';
 import { firebaseConfig } from './env';
 
+require('firebase/firebase-firestore');
+
 const Stack = createNativeStackNavigator();
 
 if (firebase.apps.length === 0) {
