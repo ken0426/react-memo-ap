@@ -5,20 +5,18 @@ import KeyboardSafeView from '../components/KeyboardSafeView';
 import firebase from 'firebase';
 
 const MemoCreateScreen = ({ navigation }: any) => {
-  const handlePress = () => {
+  const handlePress = async () => {
     const db = firebase.firestore();
     const ref = db.collection('memos');
-    ref
-      .add({
+    try {
+      const docRef = await ref.add({
         bodyText: 'Hello',
-      })
-      .then((docRef: any) => {
-        console.log('Created!', docRef.id);
-        navigation.goBack();
-      })
-      .catch((error) => {
-        console.log('Error', error);
       });
+      console.log('Created!', docRef.id);
+      navigation.goBack();
+    } catch (error) {
+      console.log('Error', error);
+    }
   };
 
   return (
