@@ -21,7 +21,6 @@ const SingUpScreen = ({ navigation }: any) => {
       .createUserWithEmailAndPassword(email, password)
       .then((userCredential) => {
         const { user } = userCredential;
-        console.log(user?.uid);
         navigation.reset({
           index: 0,
           routes: [
@@ -33,7 +32,6 @@ const SingUpScreen = ({ navigation }: any) => {
       })
       .catch((error) => {
         Alert.alert('新規登録に失敗しました');
-        console.log(error.code, error.message);
       });
   };
 
