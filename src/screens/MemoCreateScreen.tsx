@@ -11,15 +11,12 @@ const MemoCreateScreen = ({ navigation }: any) => {
     const db = firebase.firestore();
     const ref = db.collection(`users/${currentUser?.uid}/memos`); // ユーザーごとにDBへ保存する。
     try {
-      const docRef = await ref.add({
+      await ref.add({
         bodyText,
-        updateAt: new Date(), // 現在の時刻を追加
+        updatedAt: new Date(), // 現在の時刻を追加
       });
-      console.log('Created!', docRef.id);
       navigation.goBack();
-    } catch (error) {
-      console.log('Error', error);
-    }
+    } catch (error) {}
   };
 
   return (
