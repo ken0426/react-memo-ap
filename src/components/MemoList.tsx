@@ -9,6 +9,7 @@ import {
   FlatList,
 } from 'react-native';
 import { MemosType } from '../types';
+import { dateToString } from '../utils';
 
 interface itemData {
   item: MemosType;
@@ -20,7 +21,7 @@ const MemoList = ({ navigation, memos }: any) => {
       <TouchableOpacity
         key={item.id}
         onPress={() => {
-          navigation.navigate('MemoDetail');
+          navigation.navigate('MemoDetail', { id: item.id });
         }}
         style={styles.memoListItem}
       >
@@ -28,7 +29,9 @@ const MemoList = ({ navigation, memos }: any) => {
           <Text style={styles.memoListItemTitle} numberOfLines={1}>
             {item.bodyText}
           </Text>
-          <Text style={styles.memoListItemDate}>{String(item.updatedAt)}</Text>
+          <Text style={styles.memoListItemDate}>
+            {dateToString(item.updatedAt)}
+          </Text>
         </View>
         <TouchableOpacity
           style={styles.memoDelete}
