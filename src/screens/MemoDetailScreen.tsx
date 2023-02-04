@@ -17,7 +17,6 @@ const MemoDetailScreen = ({ navigation, route }: any) => {
       const db = firebase.firestore();
       const ref = db.collection(`users/${currentUser?.uid}/memos`).doc(id);
       unsubscribe = ref.onSnapshot((doc) => {
-        console.log(doc.id, doc.data());
         const data = doc.data();
         setMemo({
           id: doc.id,
@@ -46,7 +45,10 @@ const MemoDetailScreen = ({ navigation, route }: any) => {
         name={'edit-2'}
         style={{ top: 60, bottom: 'auto' }}
         onPress={() => {
-          navigation.navigate('MemoEdit');
+          navigation.navigate('MemoEdit', {
+            id: memo?.id,
+            bodyText: memo?.bodyText,
+          });
         }}
       />
     </View>
