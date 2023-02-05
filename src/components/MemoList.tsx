@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import { MemosType } from '../types';
 import { dateToString } from '../utils';
+import firebase from 'firebase';
 
 interface itemData {
   item: MemosType;
@@ -17,6 +18,31 @@ interface itemData {
 
 const MemoList = ({ navigation, memos }: any) => {
   const renderItem = ({ item }: itemData) => {
+    const deleteMemo = (id: string) => {
+      const { currentUser } = firebase.auth();
+      if (currentUser) {
+        const db = firebase.firestore();
+        const ref = db.collection(`users/${currentUser.uid}/memos`).doc(id);
+        Alert.alert('メモを削除します', 'よろしいですか？', [
+          {
+            text: 'キャンセル',
+            onPress: () => {},
+          },
+          {
+            text: '削除する',
+            style: 'destructive', // iOS限定で文字が赤色になる
+            onPress: () => {
+              try {
+                ref.delete();
+              } catch {
+                Alert.alert('削除に失敗しました');
+              }
+            },
+          },
+        ]);
+      }
+    };
+
     return (
       <TouchableOpacity
         key={item.id}
@@ -35,9 +61,7 @@ const MemoList = ({ navigation, memos }: any) => {
         </View>
         <TouchableOpacity
           style={styles.memoDelete}
-          onPress={() => {
-            Alert.alert('このリストを削除しますか？');
-          }}
+          onPress={() => deleteMemo(item.id)}
         >
           <Feather name={'x'} size={16} color='#B0B0B0' />
         </TouchableOpacity>
