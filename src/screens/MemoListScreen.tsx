@@ -6,9 +6,11 @@ import MemoList from '../components/MemoList';
 import firebase from 'firebase';
 import { MemosType } from '../types';
 import Button from '../components/Button';
+import Loading from '../components/Loading';
 
 const MemoListScreen = ({ navigation }: any) => {
   const [memos, setMemos] = useState<MemosType[]>([]);
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     navigation.setOptions({
       headerRight: () => <LogOutButton navigation={navigation} />,
@@ -22,6 +24,7 @@ const MemoListScreen = ({ navigation }: any) => {
     let unsubscribe = () => {};
     if (currentUser) {
       try {
+        setLoading(true);
         const ref = db
           .collection(`users/${currentUser?.uid}/memos`)
           .orderBy('updatedAt', 'desc'); // 新しいものが一番上に来るようにレスポンスを貰えるようにするため「desc」を追加。
@@ -39,6 +42,8 @@ const MemoListScreen = ({ navigation }: any) => {
         });
       } catch (error) {
         Alert.alert('データの読み込みに失敗しました。');
+      } finally {
+        setLoading(false);
       }
     }
     return unsubscribe;
@@ -47,6 +52,7 @@ const MemoListScreen = ({ navigation }: any) => {
   if (memos.length === 0) {
     return (
       <View style={emptyStyles.container}>
+        <Loading isLoading={loading} />
         <View style={emptyStyles.inner}>
           <Text style={emptyStyles.title}>最初のメモを作成しよう！</Text>
           <Button

@@ -9,10 +9,12 @@ import {
   Alert,
 } from 'react-native';
 import Button from '../components/Button';
+import Loading from '../components/Loading';
 
 const LoginScreen = ({ navigation }: any) => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const [loading, setLoading] = useState(true);
 
   // ログインをしているかどうか監視するロジック
   useEffect(() => {
@@ -22,29 +24,31 @@ const LoginScreen = ({ navigation }: any) => {
           index: 0,
           routes: [{ name: 'MemoList' }],
         });
+      } else {
+        setLoading(false);
       }
     });
     return unsubscribe;
   }, []);
 
-  const handlePress = () => {
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(email, password)
-      .then((userCredential) => {
-        const { user } = userCredential;
-        navigation.reset({
-          index: 0,
-          routes: [{ name: 'MemoList' }],
-        });
-      })
-      .catch((error) => {
-        Alert.alert('ログインに失敗しました');
+  const handlePress = async () => {
+    try {
+      setLoading(true);
+      await firebase.auth().signInWithEmailAndPassword(email, password);
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'MemoList' }],
       });
+    } catch (error) {
+      Alert.alert('ログインに失敗しました');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <View style={styles.container}>
+      <Loading isLoading={loading} />
       <View style={styles.inner}>
         <Text style={styles.title}>Login</Text>
         <TextInput
