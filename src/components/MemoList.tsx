@@ -51,7 +51,7 @@ const MemoList = ({ navigation, memos }: any) => {
         }}
         style={styles.memoListItem}
       >
-        <View>
+        <View style={styles.memoInner}>
           <Text style={styles.memoListItemTitle} numberOfLines={1}>
             {item.bodyText}
           </Text>
@@ -70,7 +70,7 @@ const MemoList = ({ navigation, memos }: any) => {
   };
 
   return (
-    <View>
+    <View style={styles.container}>
       <FlatList
         data={memos}
         renderItem={renderItem}
@@ -81,6 +81,9 @@ const MemoList = ({ navigation, memos }: any) => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   memoListItem: {
     backgroundColor: '#fff',
     flexDirection: 'row',
@@ -90,6 +93,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderBottomWidth: 1,
     borderColor: 'rgba(0,0,0, 0.15)',
+  },
+  memoInner: {
+    flex: 1,
   },
   memoListItemTitle: {
     fontSize: 16,
