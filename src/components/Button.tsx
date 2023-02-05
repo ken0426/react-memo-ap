@@ -4,11 +4,12 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 type Prop = {
   label: string;
   onPress?: () => void;
+  style?: object;
 };
 
-const Button = ({ label, onPress }: Prop) => {
+const Button = ({ label, onPress, style }: Prop) => {
   return (
-    <TouchableOpacity onPress={onPress} style={styles.buttonContainer}>
+    <TouchableOpacity onPress={onPress} style={[styles.buttonContainer, style]}>
       <Text style={styles.buttonLabel}>{label}</Text>
     </TouchableOpacity>
   );

@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Alert, StyleSheet, View } from 'react-native';
+import { Alert, StyleSheet, Text, View } from 'react-native';
 import CircleButton from '../components/CircleButton';
 import LogOutButton from '../components/LogOutButton';
 import MemoList from '../components/MemoList';
 import firebase from 'firebase';
 import { MemosType } from '../types';
+import Button from '../components/Button';
 
 const MemoListScreen = ({ navigation }: any) => {
   const [memos, setMemos] = useState<MemosType[]>([]);
@@ -43,23 +44,59 @@ const MemoListScreen = ({ navigation }: any) => {
     return unsubscribe;
   }, []);
 
-  return (
-    <View style={styles.container}>
-      <MemoList navigation={navigation} memos={memos} />
-      <CircleButton
-        name={'plus'}
-        onPress={() => {
-          navigation.navigate('MemoCreate');
-        }}
-      />
-    </View>
-  );
+  if (memos.length === 0) {
+    return (
+      <View style={emptyStyles.container}>
+        <View style={emptyStyles.inner}>
+          <Text style={emptyStyles.title}>最初のメモを作成しよう！</Text>
+          <Button
+            style={emptyStyles.button}
+            label='作成する'
+            onPress={() => {
+              navigation.navigate('MemoCreate');
+            }}
+          />
+        </View>
+      </View>
+    );
+  } else {
+    return (
+      <View style={styles.container}>
+        <MemoList navigation={navigation} memos={memos} />
+        <CircleButton
+          name={'plus'}
+          onPress={() => {
+            navigation.navigate('MemoCreate');
+          }}
+        />
+      </View>
+    );
+  }
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#F0F4F8',
+  },
+});
+
+const emptyStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  inner: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  title: {
+    fontSize: 18,
+    marginBottom: 24,
+  },
+  button: {
+    alignSelf: 'center',
   },
 });
 
