@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import Button from '../components/Button';
 import Loading from '../components/Loading';
+import { translateErrors } from '../utils';
 
 const LoginScreen = ({ navigation }: any) => {
   const [email, setEmail] = useState<string>('');
@@ -39,8 +40,9 @@ const LoginScreen = ({ navigation }: any) => {
         index: 0,
         routes: [{ name: 'MemoList' }],
       });
-    } catch (error) {
-      Alert.alert('ログインに失敗しました');
+    } catch (error: any) {
+      const errorMsg = translateErrors(error.code);
+      Alert.alert(errorMsg.title, errorMsg.description);
     } finally {
       setLoading(false);
     }

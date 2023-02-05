@@ -10,29 +10,27 @@ import {
 import Button from '../components/Button';
 
 import firebase from 'firebase';
+import { translateErrors } from '../utils';
 
 const SingUpScreen = ({ navigation }: any) => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
-  const handlePress = () => {
-    firebase
-      .auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then((userCredential) => {
-        const { user } = userCredential;
-        navigation.reset({
-          index: 0,
-          routes: [
-            {
-              name: 'MemoList',
-            },
-          ],
-        });
-      })
-      .catch((error) => {
-        Alert.alert('新規登録に失敗しました');
+  const handlePress = async () => {
+    try {
+      await firebase.auth().createUserWithEmailAndPassword(email, password);
+      navigation.reset({
+        index: 0,
+        routes: [
+          {
+            name: 'MemoList',
+          },
+        ],
       });
+    } catch (error: any) {
+      const errorMsg = translateErrors(error.code);
+      Alert.alert(errorMsg.title, errorMsg.description);
+    }
   };
 
   return (
