@@ -23,8 +23,8 @@
       "versionCode": 1,
       "permissions": [],
       "adaptiveIcon": {
-        "foregroundImage": "./assets/an_adaptive-icon.png.png",
-        "backgroundImage": "./assets/Rectangle 5.png"
+        "foregroundImage": "./assets/memoIcon.png",
+        "backgroundImage": "./assets/memoIconBackGroundImage.png"
       }
     },
     "web": {
